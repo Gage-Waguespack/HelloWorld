@@ -8,8 +8,9 @@ namespace HelloWorld
     {
         public void Run()
         {
+            bool training = false;
             bool gameover = false;
-            while (gameover == false) 
+            while (gameover == false)
             {
                 //This stores health
                 float health = 80.0f;
@@ -26,13 +27,24 @@ namespace HelloWorld
                 int gianthlth = 200;
                 int currentenemyhlth = 0;
                 int currentenemydmg = 0;
-                Console.WriteLine("Old Man: Greetings, who are you?!");
+                void PrintStats(string name, float playerheatlh, int damage, int level, string role)
+                {
+                    Console.WriteLine("\nPlayer Name: " + name);
+                    Console.WriteLine("Player Health: " + health);
+                    Console.WriteLine("Player Damage: " + damage);
+                    Console.WriteLine("Player Level: " + level);
+                    Console.WriteLine("Player Role: " + role);
+                    Console.WriteLine("Weapon: " + weapon);
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
+                }
+                Console.WriteLine("\nOld Man: Greetings, who are you?!");
                 //This lets you set a custom name
                 string name = Console.ReadLine();
                 Console.WriteLine("Old Man: Well hello " + name + ", please select your profession?");
                 Console.WriteLine("Press 1 for Beefcake role");
                 Console.WriteLine("Press 2 for Glass Cannon role");
-                char input = Console.ReadKey().KeyChar;
+                char input = ' ';
                 Console.WriteLine();
                 while (input != '1' && input != '2')
                 {
@@ -53,7 +65,7 @@ namespace HelloWorld
                         Console.WriteLine("\nNo class selected. Are you dumb or something?!");
                     }
                 }
-                Console.WriteLine("Old Man: So " + name + " You're a " + role + ", very interesting");
+                Console.WriteLine("\nOld Man: So " + name + " You're a " + role + ", very interesting");
                 Console.WriteLine("Old Man: Come here " + name + ", you seem to be hurt. What is your health?");
                 //Tells the viewer the health variable
                 Console.WriteLine(health);
@@ -63,14 +75,8 @@ namespace HelloWorld
                 Console.Write(name + " just healed " + healthregen);
                 Console.WriteLine("  ");
                 //This will tell the player their stats
-                Console.WriteLine("Old Man: So from what I have gathered, this is you.");
-                Console.WriteLine("\nPlayer Name: " + name);
-                Console.WriteLine("Player Health: " + health);
-                Console.WriteLine("Player Damage: " + damage);
-                Console.WriteLine("Player Level: " + level);
-                Console.WriteLine("Player Role: " + role);
-                Console.WriteLine("Press any key to continue");
-                input = Console.ReadKey().KeyChar;
+                Console.WriteLine("These are your stats as of now!");
+                PrintStats(name, health, damage, level, role);
 
                 Console.Clear();
 
@@ -125,15 +131,7 @@ namespace HelloWorld
                     Console.WriteLine("\nOld Man: So, you prefer fisticuffs eh? Well so be it..");
                 }
                 Console.WriteLine("These are your new stats!");
-                Console.WriteLine("\nPlayer Name: " + name);
-                Console.WriteLine("Player Health: " + health);
-                Console.WriteLine("Player Damage: " + damage);
-                Console.WriteLine("Player Level: " + level);
-                Console.WriteLine("Player Role: " + role);
-                Console.WriteLine("Weapon: " + weapon);
-                Console.WriteLine("\nDo you wish to continue?");
-
-                Console.ReadKey();
+                PrintStats(name, health, damage, level, role);
 
                 Console.Clear();
 
@@ -147,6 +145,7 @@ namespace HelloWorld
                 // while(gameOver = false) { if(playerHealth <=0) { console.writeline("you died, play again?") console.writeline("press 1 for yes") console.writeline("press 2 for no")
                 // if(input == '1') { continue; } else if(input == '2') { break }
                 // This asks if the player wants to quit or not!
+                //Added a giant encounter that is only possible if you are a beefcake or have the rubber chicken..
                 if (input == '1')
                 {
                     currentenemydmg = giantdmg;
@@ -182,7 +181,7 @@ namespace HelloWorld
                         Console.WriteLine(currentenemyhlth);
                         Console.WriteLine("You landed a clean hit on the Giant!");
                     }
-                    while (health >= 0 && currentenemyhlth >= 0) 
+                    while (health >= 0 && currentenemyhlth >= 0)
                     {
                         Console.WriteLine(currentenemyhlth + " - " + damage);
                         currentenemyhlth -= damage;
@@ -199,21 +198,108 @@ namespace HelloWorld
                         health += 1150;
                         damage += damage *= 2;
                         Console.WriteLine("These are your new stats!");
-                        Console.WriteLine("\nPlayer Name: " + name);
-                        Console.WriteLine("Player Health: " + health);
-                        Console.WriteLine("Player Damage: " + damage);
-                        Console.WriteLine("Player Level: " + level);
-                        Console.WriteLine("Player Role: " + role);
-                        Console.WriteLine("Weapon: " + weapon);
+                        PrintStats(name, health, damage, level, role);
                     }
-                        Console.WriteLine("\nDo you wish to continue?");
+                }
+                else if (input == '2')
+                {
+                    Console.WriteLine("You just don't think it's worth it, they'll be fine..");
+                }
+                Console.WriteLine("\nDo you wish to continue?");
 
-                        Console.ReadKey();
+                Console.ReadKey();
 
-                        Console.Clear();
+                Console.Clear();
 
-                    Console.WriteLine("You continue your adventure with a smile!");
-                    
+                //for(int i = 0; i< 5; i++
+                //console.writeline("You have " + (5 - i) + " tries remaining");
+                //This limits choices, could be useful in the future! ^
+                // guess = console.readline();
+                //if(guess == "yes")
+                //This would be how to make the answer, the answer being yes in this example!^
+
+                Console.WriteLine("You continue your adventure with a smile!");
+                Console.WriteLine("You begin walking down a path until you reach a sign.");
+                Console.WriteLine("The sign is right infront of a split in the road");
+                Console.WriteLine("The road leading to the left is labeled to be a dead end.");
+                Console.WriteLine("The road leading right says to lead to the town.");
+                Console.WriteLine("You decide to take a right after some thinking and arrive in the town of Claymore");
+                Console.WriteLine("Press anything to continue");
+                Console.ReadKey();
+                Console.WriteLine("Once you arrive people seem to stare at you and you feel out of place.");
+                Console.WriteLine("After walking around alittle, you get approached by a very intimidating man");
+                Console.WriteLine("Man: Well what do we have here? You're new to town huh??");
+                Console.WriteLine("Man: You know what? Don't say a word, I can tell you're new because you don't know who I am...");
+                Console.WriteLine("Trainer: I AM the owner of the training grounds :D");
+                if (health <= 200 && damage <= 150 && level <= 10)
+                {
+                    Console.WriteLine("Trainer: Come, you need to train before you are respected around here!");
+                    Console.WriteLine("You train until you can barely stand");
+                    level += 9;
+                    health += 200;
+                    damage += 150;
+                    Console.WriteLine("Trainer: You seemed to have trained until you gained the exact stats! Very Well!!");
+                    Console.WriteLine("You raised your health by 200, your damage by 150, and you are now level 10!!");
+                    Console.WriteLine("These are your new stats!");
+                    PrintStats(name, health, damage, level, role);
+                }
+                else if (health >= 200 && damage >= 150 && level >= 10)
+                {
+                    Console.WriteLine("Trainer: You seem strong! However, you have much potential, would you like to train?");
+                    Console.WriteLine("Press 1 for yes");
+                    Console.WriteLine("Press 2 for no");
+                    input = Console.ReadKey().KeyChar;
+                    if (input == '1')
+                    {
+                        training = true;
+                        while (training == true)
+                        {
+                            level += 1;
+                            damage += 20;
+                            health += 50;
+                            Console.WriteLine("You train to your hearts content!");
+                            Console.WriteLine("Your stats have changed!");
+                            Console.WriteLine("These are your new stats!");
+                            Console.WriteLine("\nPlayer Name: " + name);
+                            Console.WriteLine("Player Health: " + health);
+                            Console.WriteLine("Player Damage: " + damage);
+                            Console.WriteLine("Player Level: " + level);
+                            Console.WriteLine("Player Role: " + role);
+                            Console.WriteLine("Weapon: " + weapon);
+                            Console.WriteLine("Press any key to continue!");
+                            Console.ReadKey();
+
+                            Console.Clear();
+
+                            Console.WriteLine("Would you like train more?");
+                            Console.WriteLine("Press 1 to Train more!");
+                            Console.WriteLine("Press 2 to continue!");
+                            input = Console.ReadKey().KeyChar;
+                            if (input == '1')
+                            {
+                                Console.WriteLine("\nYou Train again!");
+                            }
+                            else if (input == '2')
+                            {
+                                training = false;
+                                Console.WriteLine("\nWow, you've trained a lot! I think you've outdone yourself. Maybe now people will seek you out!");
+                                break;
+                            }
+                        }
+                    }
+                    else if (input == '2')
+                    {
+                        Console.WriteLine("Trainer: Very well then.. I'm gonna be moving up a few towns so you won't be able to train until you find me again!");
+                    }
+                }
+                Console.WriteLine("Now that you're done there you go to explore more of the town");
+                Console.WriteLine("After some walking you see two guys cornering a girl and they seem to be trying to steal from her!!");
+                Console.WriteLine("Press 1 to help her");
+                Console.WriteLine("Press 2 to ignore it and walk away..");
+                input = Console.ReadKey().KeyChar;
+                if(input == '1')
+                {
+                    Console.WriteLine("YOU JUMP IN AND HELP THE GIRL STARTING A FIGHT WITH TWO THUGS!!"); 
                 }
             }
         }
